@@ -1,3 +1,4 @@
 #include <string>
+#include <cctype>
 
-std::string hello();
+int strcmp_case_insensitive(std::string stringOne, std::string stringTwo);
