@@ -26,5 +26,24 @@ TEST_CASE( "it returns Hello World" ) {
     REQUIRE(strcmp_case_insensitive("AbC", "aBc") == 0);
     REQUIRE(strcmp_case_insensitive("Catch2", "catch3") < 0);
     REQUIRE(strcmp_case_insensitive("catch3", "catch2") > 0);
+
+    // skipping spaces
+    REQUIRE(strcmp_case_insensitive("a b c", "abc") != 0);
+    REQUIRE(strcmp_case_insensitive("Hello World", "HelloWorld") != 0);
+    REQUIRE(strcmp_case_insensitive(" spaced", "spaced") != 0);
+    REQUIRE(strcmp_case_insensitive("a b c", "abc", true) == 0);
+    REQUIRE(strcmp_case_insensitive("Hello World", "helloworld", true) == 0);
+    REQUIRE(strcmp_case_insensitive(" spaced", "spaced", true) == 0);
+    REQUIRE(strcmp_case_insensitive("space d", "sp aced", true) == 0);
+    REQUIRE(strcmp_case_insensitive(" multiple   spaces", "multiplespaces", true) == 0);
+    REQUIRE(strcmp_case_insensitive("a c", "ab", true) > 0);
+    REQUIRE(strcmp_case_insensitive("ab", "a c", true) < 0);
+    REQUIRE(strcmp_case_insensitive("C a T", "cat", true) == 0);
+    REQUIRE(strcmp_case_insensitive("Dog House", "doghouse", true) == 0);
+    REQUIRE(strcmp_case_insensitive("Dog House", "doghousf", true) < 0);
+    REQUIRE(strcmp_case_insensitive("   ", "", true) == 0);
+    REQUIRE(strcmp_case_insensitive("", "   ", true) == 0);
+    REQUIRE(strcmp_case_insensitive("a", " ", true) > 0);
+    REQUIRE(strcmp_case_insensitive(" ", "a", true) < 0);
     
 }
