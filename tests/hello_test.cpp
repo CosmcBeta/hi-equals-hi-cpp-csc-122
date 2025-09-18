@@ -45,5 +45,16 @@ TEST_CASE( "it returns Hello World" ) {
     REQUIRE(strcmp_case_insensitive("", "   ", true) == 0);
     REQUIRE(strcmp_case_insensitive("a", " ", true) > 0);
     REQUIRE(strcmp_case_insensitive(" ", "a", true) < 0);
+
+    // including character limit
+    REQUIRE(strcmp_case_insensitive("HelloWorld", "helloworld", false, -1) == 0);
+    REQUIRE(strcmp_case_insensitive("HelloWorld", "HELium", false, 3) == 0);
+    REQUIRE(strcmp_case_insensitive("HelloWorld", "HELium", false, 4) > 0);
+    REQUIRE(strcmp_case_insensitive("abc", "xyz", false, 0) == 0);
+    REQUIRE(strcmp_case_insensitive("cat", "dog", false, -5) < 0);
+    REQUIRE(strcmp_case_insensitive("cat", "dog", false, 2) < 0);
+    REQUIRE(strcmp_case_insensitive("a b c d", "abcdz", true, 5) < 0);
+    REQUIRE(strcmp_case_insensitive("H e l lo", "HELx", true, 3) == 0);
+
     
 }

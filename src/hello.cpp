@@ -1,8 +1,8 @@
 #include "hello.hpp"
 
-int strcmp_case_insensitive(std::string stringOne, std::string stringTwo, bool skipSpaces)
+int strcmp_case_insensitive(std::string stringOne, std::string stringTwo, bool skipSpaces, int maxChars)
 {  
-   if (stringOne == "" && stringTwo == "")
+   if (stringOne == "" && stringTwo == "" || maxChars == 0)
       return 0;
 
    std::string first = "";
@@ -41,6 +41,9 @@ int strcmp_case_insensitive(std::string stringOne, std::string stringTwo, bool s
          return first[i] - second[i];
 
       i++;
+
+      if (i == maxChars)
+         return 0;
 
       if (first.length() == i || second.length() == i)
       {
